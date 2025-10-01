@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor - {{ vendor.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f9f9f9;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        .vendor-info {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            padding: 12px 15px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background: #c0392b;
+        }
+
+                .vendor-btn {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            font-size: 1.1rem;
+            background-color: #fff;
+            color: #333;
+            border: 2px solid #444;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-decoration: none;
+        }
+
+        .vendor-btn:hover {
+            background-color: #e0e0e0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+        }
+
+        .vendor-details {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Views via page: {{ vendor.name }}</h1>
+
+    <div class="vendor-info">
+        <p><strong>ID:</strong> {{ vendor.id }}</p>
+        <p><strong>Name:</strong> {{ vendor.name }}</p>
+    </div>
+
+    <h2>Delivery Boys</h2>
+    <a href="{% url 'add_delivery_boy' vendor.id %}" class="add-btn">Add Delivery Boy</a>
+    
+        {% for db in delivery_boys %}
+       <div class="db-item">
+       <a href="{% url 'info' vendor.id db.name %}" class="vendor-btn">
+            <span class="vendor-id">{{ db.name }}</span><br>
+
+        </a>
+        <div class="actions">
+            <a href="{% url 'edit_delivery_boy' vendor.id db.name %}" class="edit-btn">Edit</a>
+            <a href="{% url 'delete_delivery_boy' vendor.id db.name %}" class="delete-btn">Delete</a>
+        </div>
+        </div>
+        {% endfor %}
+    
+
+
+</body>
+
+</html>
